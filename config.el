@@ -91,7 +91,7 @@
 ;; org
 (setq org-directory "~/Dropbox/Org/")
 (setq org-agenda-files '("~/Dropbox/Org/"))
-(setq org-agenda-start-day (org-today))
+;; (setq org-agenda-start-day (org-today))
 (add-hook 'org-mode-hook 'org-bullets-mode)
 
 ;; battery
