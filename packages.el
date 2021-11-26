@@ -43,6 +43,14 @@
 (package! elcord)
 (package! prettier-js)
 (package! org-bullets)
+(package! kanban)
+
+(package! gitconfig-mode
+        :recipe (:host github :repo "magit/git-modes"
+                :files ("gitconfig-mode.el")))
+(package! gitignore-mode
+        :recipe (:host github :repo "magit/git-modes"
+                :files ("gitignore-mode.el")))
 
 ;; Doom's packages are pinned to a specific commit and updated from release to
 ;; release. The `unpin!' macro allows you to unpin single packages...

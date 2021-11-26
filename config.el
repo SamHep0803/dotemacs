@@ -6,8 +6,8 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
-(setq user-full-name "John Doe"
-      user-mail-address "john@doe.com")
+(setq user-full-name "Samuel Hepworth"
+      user-mail-address "samhep0803@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -19,13 +19,14 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Anonymice Nerd Font" :size 15 ))
+(setq doom-font (font-spec :family "JetBrains Mono" :size 12 )
+      doom-big-font (font-spec :family "JetBrains Mono" :size 16))
 (setq doom-themes-treemacs-variable-pitch-face nil)
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-zenburn)
+(setq doom-theme 'doom-nord)
 (setq doom-themes-treemacs-theme "doom-colors")
 
 ;; If you use `org' and don't want your org files in the default location below,
@@ -70,20 +71,21 @@
 
 ;; formatting
 (setq-default tab-width 2)
-(setq tide-format-options '(:tabSize 2 :indentSize 2))
+(setq tide-format-options '(:tabSize 2 :indentSize 1))
 (add-hook 'before-save-hook 'tide-format-before-save)
 (add-hook 'web-mode-hook 'prettier-js-mode)
 (add-hook 'tide-mode-hook 'prettier-js-mode)
 
-;; elcord icons
+;; elcord
 (setq elcord-editor-icon "emacs_material_icon")
 (setq elcord-mode-icon-alist '((web-mode . "typescript-mode_icon")))
+(elcord-mode)
 
 ;; keybinds
 (map! :localleader
-        (:map tide-mode-map
-        :desc "Code Actions"
-        "." #'tide-fix))
+      (:map tide-mode-map
+       :desc "Code Actions"
+       "." #'tide-fix))
 
 ;; setting PATH
 (setenv "PATH" "/opt/homebrew/opt/curl/bin:/opt/homebrew/bin:/opt/homebrew/opt/llvm/bin:/opt/homebrew/opt/libarchive/bin:/opt/homebrew/opt/ncurses/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin")
@@ -91,8 +93,8 @@
 ;; org
 (setq org-directory "~/Dropbox/Org/")
 (setq org-agenda-files '("~/Dropbox/Org/"))
-(setq org-agenda-start-day (org-today))
-(add-hook 'org-mode-hook 'org-bullets-mode)
+;; (setq org-agenda-start-day (org-today))
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
 ;; battery
 (unless (equal "Battery status not available"
@@ -101,10 +103,21 @@
 
 ;; pseudocode
 (defun sam/to-pseudocode ()
-    (interactive)
-    (save-window-excursion
-      (shell-command (concat "translate-py "(buffer-file-name)))))
+  (interactive)
+  (save-window-excursion
+    (shell-command (concat "translate-py "(buffer-file-name)))))
 (map! :localleader
       (:map anaconda-mode-map
        :desc "Convert to pseudocode"
        "p" #'sam/to-pseudocode))
+
+;; treemacs
+(setq treemacs-position 'right)
+
+;; add margin to minibuffer
+(defun mb-margin()
+  (setq minibuffer-temporary-goal-position (* 2 (frame-width))))
+(add-hook 'minibuffer-setup-hook 'mb-margin)
+
+;; dashboard links
+;; (setq doom-dashboard)
