@@ -44,6 +44,7 @@
 (package! prettier-js)
 (package! org-bullets)
 (package! kanban)
+(package! burly)
 
 (package! gitconfig-mode
         :recipe (:host github :repo "magit/git-modes"

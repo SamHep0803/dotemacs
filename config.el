@@ -71,8 +71,9 @@
 
 ;; formatting
 (setq-default tab-width 2)
-(setq tide-format-options '(:tabSize 2 :indentSize 1))
-(add-hook 'before-save-hook 'tide-format-before-save)
+(setq tide-format-options '(:tabSize 2 :indentSize 2))
+(setq typescript-indent-level 4)
+;; (add-hook 'before-save-hook 'tide-format-before-save)
 (add-hook 'web-mode-hook 'prettier-js-mode)
 (add-hook 'tide-mode-hook 'prettier-js-mode)
 
